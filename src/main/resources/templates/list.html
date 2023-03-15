@@ -10,28 +10,43 @@
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
     integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
-  <link rel="stylesheet" href="./mercari.css"/>
+  <link rel="stylesheet" th:href="@{/css/mercari.css}"/>
   <!-- script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  
   <title>Rakus Items</title>
 </head>
 <body>
   <!-- navbar -->
   <nav class="navbar navbar-inverse">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+      <button 
+      	type="button" 
+      	class="navbar-toggle collapsed" 
+      	data-toggle="collapse" 
+      	data-target="#navbar" 
+      	aria-expanded="false" 
+      	aria-controls="navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" th:href="@{/items/showItemList}">Rakus Items</a>
+      <a 
+      	class="navbar-brand" 
+      	th:href="@{/items/showItemList}">Rakus Items
+      </a>
     </div>
     <div id="navbar" class="collapse navbar-collapse">
       <div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a id="logout" href="./login.html">Logout <i class="fa fa-power-off"></i></a></li>
+          <li>
+          	<a id="logout" 
+          	   th:href="@{/login}">Login
+          	   <i class="fa fa-power-off"></i>
+          	</a>
+          </li>
         </ul>
         <p class="navbar-text navbar-right">
           <span id="loginName">user: userName</span>
@@ -43,65 +58,131 @@
   <div id="main" class="container-fluid">
     <!-- addItem link -->
     <div id="addItemButton">
-      <a class="btn btn-default" th:href="@{/addList}"><i class="fa fa-plus-square-o"></i> Add New Item</a>
+      <a 
+      	class="btn btn-default" 
+      	th:href="@{/add/addList}">
+      	<i class="fa fa-plus-square-o"></i> Add New Item
+      </a>
     </div>
+
 
     <!-- 検索フォーム -->
     <div id="forms">
-      <form action="" class="form-inline" role="form">
+      <form 
+      	method="POST" 
+      	class="seach-form" 
+      	th:action="@{/items/search}" 
+      	th:Object="${itemSeachForm}"
+      	role="form">
         <div class="form-group">
+          <span th:text="${result}"><script>alert ('該当する商品がありません')</script>該当する商品がありません</span> 
+          <input 
+          	type="text"
+          	class="form-control" 
+          	id="name" 
+          	placeholder="item name" 
+          	name="name" 
+          	autocomplete="name" 
+          	list="itemList">
+			<datalist id="itemList">
+				<option 
+					th:each="item:${itemList}" 
+					th:value="${item.name}">
+				</option>
+			</datalist>
+		</div>
+		
+		
+		<!-- category -->
+        <div class="form-group">
+        	<i class="fa fa-plus"></i>
+        </div>
+         <div class="form-group">
           
-          <input type="input" class="form-control" id="name" placeholder="item name"/>
-        </div>
-        <div class="form-group"><i class="fa fa-plus"></i></div>
-        <div class="form-group">
-          <select class="form-control">
-            <option>- parentCategory -</option>
-            <option>parentCategory1</option>
-            <option>parentCategory2</option>
-            <option>parentCategory3</option>
-            <option>parentCategory4</option>
-            <option>parentCategory5</option>
+          
+          <!-- カテゴリーごとに関連して取り出す処理 -->
+          <select id="bigCategory" class="form-control">
+            <option>-- parentCategory --</option>
+            <option 
+            	th:each = "bigCategory:${bigCategoryList}" 
+            	th:text="${bigCategory.name}" 
+            	th:value="${bigCategory.id}"
+            	>-- parentCategory --
+            </option>
           </select>
-          <select class="form-control">
-            <option>- childCategory -</option>
+          <select id="childCategory" class="form-control">
+         	<option >- childCategory -</option>
+            <option 
+            	th:each = "childCategory:${childCategoryList}" 
+            	th:text="${childCategory.name}" 
+            	th:value="${childCategory.id}"
+            	>- childCategory -
+            </option>
             <option>childCategory1</option>
-            <option>childCategory2</option>
-            <option>childCategory3</option>
-            <option>childCategory4</option>
-            <option>childCategory5</option>
           </select>
-          <select class="form-control">
+          <select id="grandCategory" class="form-control">
             <option>- grandChild -</option>
+            <option 
+            	th:each="grandCategory:${grandCategoryList}" 
+            	th:text="${grandCategory.name}" 
+            	th:value="${grandCategory.id}"
+            	>- grandChild -
+            </option>
             <option>grandChild1</option>
-            <option>grandChild2</option>
-            <option>grandChild3</option>
-            <option>grandChild4</option>
-            <option>grandChild5</option>
           </select>
-        </div>
+           <!-- カテゴリーごとに関連して取り出す処理 ここまで -->
+         </div>
+        
+        
         <div class="form-group"><i class="fa fa-plus"></i></div>
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="brand"/>
+         <span th:text="${result}">該当する商品がありません</span>
+          <input type="text" 
+          		 class="form-control" 
+          		 id="brand" 
+          		 placeholder="brand" 
+          		 name="brand" 
+          		 autocomplete="brand" 
+          		 list="itemList2" />
+            <datalist id="itemList2">
+				<option th:each="item:${itemList}" 
+						th:value="${item.brand}">
+				</option>
+			</datalist>
         </div>
         <div class="form-group"></div>
-        <button type="submit" class="btn btn-default"><i class="fa fa-angle-double-right"></i> search</button>
+        <button 
+        	type="submit" 
+        	class="btn btn-default">
+        	<i class="fa fa-angle-double-right">search</i>
+        </button>
       </form>
     </div>
+
 
     <!-- pagination -->
     <div class="pages">
       <nav class="page-nav">
         <ul class="pager">
-          <li class="previous"><a href="#">&larr; prev</a></li>
-          <li class="next"><a href="#">next &rarr;</a></li>
+       	  <li class="top">
+       	  	<a th:href="@{/items/showItemList}">&larr; top</a>
+       	  </li>
+       	  <li class="prev">
+       	  	<a th:href="@{/items/next?num1=} + ${-1}">&larr; prev</a>
+       	  </li>
+       	  <li class="next">
+       	  	<a th:href="@{/items/next?num1=} + ${+1}">next &rarr; </a>
+       	  </li>
         </ul>
       </nav>
     </div>
+    
 
     <!-- table -->
     <div class="table-responsive" >
-      <table id="item-table" class="table table-hover table-condensed">
+      <table 
+      	id="item-table" 
+      	class="table table-hover table-condensed">
         <thead>
           <tr>
             <th>name</th>
@@ -113,42 +194,73 @@
         </thead>
         <tbody>
           <tr th:each = "item:${itemList}">
-            <td class="item-name" ><a th:href="@{/itemDetail?id=}+${item.id}" th:text = ${item.name} >Razer BlackWidow Chroma Keyboard</a></td>
+            <td class="item-name" >
+            	<a th:href="@{/itemDetail?id=}+${item.id}" 
+            	   th:text = ${item.name} >Razer BlackWidow Chroma Keyboard
+            	</a>
+            </td>
             <td class="item-price" th:text = ${item.price}>52.0</td>
             <td class="item-category" th:text = ${item.category}><a href="">Electronics</a> / <a href="">Computers &amp; Tablets</a> / <a href="">Components &amp; Parts</a></td>
             <td class="item-brand" th:text = ${item.brand}><a href="">Razer</a></td>
             <td class="item-condition" th:text = ${item.condition}>3</td>
           </tr>
-          
         </tbody>
       </table>
     </div>
+
 
     <!-- pagination -->
     <div class="pages">
       <nav class="page-nav">
         <ul class="pager">
-          <li class="previous"><a href="#">&larr; prev</a></li>
-          <li class="next"><a href="#">next &rarr;</a></li>
+       	  <li class="top">
+       	  	<a th:href="@{/items/showItemList}">&larr; top</a>
+       	  </li>
+       	  <li class="prev">
+       	  	<a th:href="@{/items/next?num1=} + ${-1}">&larr; prev</a>
+       	  </li>
+       	  <li class="next">
+       	  	<a th:href="@{/items/next?num1=} + ${+1}">next &rarr; </a>
+       	  </li>
         </ul>
       </nav>
+      
+      
       <!-- ページ番号を指定して表示するフォーム -->
       <div id="select-page">
-        <form class="form-inline">
+        <form 
+        	class="form-inline" 
+        	method="post" 
+        	th:action="@{/items/selectPage}">
           <div class="form-group">
             <div class="input-group col-xs-6">
               <label></label>
-              <input type="text" class="form-control"/>
+              <input 
+              	name ="num1" 
+              	type="text" class="form-control"/> 
+              	
+              	
               <!-- 総ページ数 -->
-              <div class="input-group-addon">/ 20</div>
+              <div class="input-group-addon" th:text="${maxPage}">/ 20</div>
             </div>
             <div class="input-group col-xs-1">
-              <button type="submit" class="btn btn-default">Go</button>
+              <button 
+              	type="submit" 
+              	class="btn btn-default">Go
+              </button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
+  
+  
+  <!-- scriptタグ -->
+  	<script type="text/javascript" src="jquery.pagination.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->    
+  	<script th:src="@{/js/listAjax.js}"></script>
+  	<script th:src="@{/js/jquery.pagination.js}"></script>
+	<script th:src="@{/js/SelectBox.js}"></script>
 </body>
 </html>

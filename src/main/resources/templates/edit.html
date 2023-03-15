@@ -10,7 +10,7 @@
     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
     integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
-  <link rel="stylesheet" href="./mercari.css"/>
+  <link rel="stylesheet" th:href="@{/css/mercari.css}"/>
   <!-- script -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
@@ -41,102 +41,230 @@
   </nav>
 
   <!-- details -->
-  <div id="input-main" class="container">
-    <a type="button" class="btn btn-default" th:href="@{/itemDetail}"><i class="fa fa-reply"></i> back</a>
+  <!-- onClick="history.go(-1); は遷移元に戻る処理-->
+    <a type="button" class="btn btn-default" onClick="history.go(-1);"><i class="fa fa-reply"></i> back</a>
     <h2>Edit</h2>
 
     <!-- edit form -->
-    <form action="#" method="POST" class="form-horizontal">
+    <form th:action="@{/edit/update}" 
+    	  method="POST" 
+    	  class="form-horizontal"
+    	  th:object="${editForm}">
+    	  <input type="hidden" 
+    	         name="id"
+    	         th:value="${item.id}">
+        
+        
         <!-- name -->
         <div class="form-group">
-          <label for="inputName" class="col-sm-2 control-label">name</label>
+          <label for="inputName" 
+          	     class="col-sm-2 control-label">name</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="inputName"/>
+            <input id="inputName" 
+            	   type="text" 
+            	   name="name" 
+            	   class="form-control" 
+            	   th:value="${item.name}"/> 
+            <span class="text-danger"
+          		th:if="${#fields.hasErrors('name')}" th:errors="*{name}">error:may not be empty</span>
           </div>
         </div>
+        
+        
         <!-- price -->
         <div class="form-group">
           <label for="price" class="col-sm-2 control-label">price</label>
           <div class="col-sm-8">
-            <input type="text" class="form-control" id="price"/>
+            <input name="price"
+            	   type="text" 
+            	   class="form-control" 
+            	   id="price"
+            	   th:value="${item.price}"/>
+             <span class="text-danger"
+          		th:if="${#fields.hasErrors('price')}" th:errors="*{price}">error:may not be empty</span>
           </div>
         </div>
+        
+        
         <!-- category -->
-        <div class="form-group">
-          <label for="category" class="col-sm-2 control-label">category</label>
+        
+        <div class="form-group" id="category">
+          <label for="category" 
+          		 class="col-sm-2 control-label">category</label>
           <div class="col-sm-8">
-            <select class="form-control">
-              <option>- parentCategory -</option>
-              <option>parentCategory1</option>
-              <option>parentCategory2</option>
-              <option>parentCategory3</option>
-              <option>parentCategory4</option>
-              <option>parentCategory5</option>
-            </select>
+          
+          
+          <!-- カテゴリーごとに関連して取り出す処理 -->
+            <select id="bigcategory" class="form-control" name = "bigcategory">
+          <!--   <option>-- parentCategory --</option> --> 
+            <option 
+            	th:each = "bigcategory:${bigcategoryList}" 
+            	th:text="${bigcategory.name}" 
+            	th:value="${bigcategory.id}"
+            	>-- parentCategory --
+            </option>
+          </select>
+          <select id="childcategory" class="form-control" name = "childcategory">
+         	<!--  <option >- childCategory -</option> -->
+            <option 
+            	th:each = "childcategory:${childcategoryList}" 
+            	th:text="${childcategory.name}" 
+            	th:value="${childcategory.id}"
+            	>- childCategory -
+            </option>
+           
+          </select>
+          <select id="grandcategory" class="form-control" name= "grandcategory">
+           <!--  <option>- grandChild -</option> -->
+            <option 
+            	th:each="grandcategory:${grandcategoryList}" 
+            	th:text="${grandcategory.name}" 
+            	th:value="${grandcategory.id}"
+            	>- grandChild -
+            </option>
+            
+          </select>
           </div>
         </div>
-        <div class="form-group">
-          <label for="category" class="col-sm-2 control-label"></label>
-          <div class="col-sm-8">
-            <select class="form-control">
-              <option>- childCategory -</option>
-              <option>childCategory1</option>
-              <option>childCategory2</option>
-              <option>childCategory3</option>
-              <option>childCategory4</option>
-              <option>childCategory5</option>
-            </select>
-          </div>
+           <div class="form-group">
+        <label 
+        	for="category" 
+        	class="col-sm-2 control-label">
+        </label>
+       	 	<div class="col-sm-8">
+        		<span class="text-danger"
+           			th:errors="*{bigcategory}">error:may not be empty</span>
+        		<span class="text-danger"
+           			th:errors="*{childcategory}">error:may not be empty</span>
+        		<span class="text-danger"
+           			th:errors="*{grandcategory}">error:may not be empty</span>
+       		 </div>
         </div>
-        <div class="form-group">
-          <label for="category" class="col-sm-2 control-label"></label>
-          <div class="col-sm-8">
-            <select class="form-control">
-              <option>- grandChild -</option>
-              <option>grandChild1</option>
-              <option>grandChild2</option>
-              <option>grandChild3</option>
-              <option>grandChild4</option>
-              <option>grandChild5</option>
-            </select>
-          </div>
-        </div>
+        <!-- カテゴリーごとに関連して取り出す処理 ここまで -->
+        
         <!-- brand -->
         <div class="form-group">
-          <label for="brand" class="col-sm-2 control-label">brand</label>
+          <label for="inputBrand" 
+          	     class="col-sm-2 control-label">brand</label>
           <div class="col-sm-8">
-            <input type="text" id="brand" class="form-control" name="brand"/>
+            <input type="text" 
+            	   name="brand"
+            	   class="form-control" 
+            	   id="inputBrand" 
+            	   th:value="${item.brand}"/> 
+            <span class="text-danger"
+          		 th:errors="*{brand}">error:may not be empty</span>
           </div>
         </div>
+        
         <!-- condition -->
         <div class="form-group">
           <label for="condition" class="col-sm-2 control-label">condition</label>
+          		<span class="text-danger"
+          			  th:errors="*{condition}">error:may not be empty</span>
           <div class="col-sm-8">
             <label for="condition1" class="radio-inline">
-              <input type="radio" name="condition" id="condition1" value="1"/> 1
+              <input type="radio" 
+              		 name="condition" 
+              		 id="condition1" 
+              		 value="1" 
+              		 checked=checked
+              		 th:value="${item.condition}"/> 1
+              		 
             </label>
             <label for="condition2" class="radio-inline">
-              <input type="radio" name="condition" id="condition2" value="2"/> 2
+              <input type="radio" 
+              		 name="condition" 
+              		 id="condition2" 
+              		 value="2"
+              		 th:value="${item.condition}"/> 2
             </label>
             <label for="condition3" class="radio-inline">
-              <input type="radio" name="condition" id="condition3" value="3"/> 3
+              <input type="radio" 
+                     name="condition"   
+                     id="condition3" 
+                     value="3"
+                     th:value="${item.condition}"/> 3
             </label>
           </div>
         </div>
+        
+        <!-- shipping -->
+      <div class="form-group">
+        <label 
+        	for="shipping" 
+        	class="col-sm-2 control-label">shipping</label>
+        <div class="col-sm-8">
+          <label for="shipping1" class="radio-inline">
+            <input 
+            	type="radio" 
+            	name="shipping" 
+            	id="shipping1" 
+            	value="1"
+            	checked=checked
+            	th:field="*{shipping}"/> 1
+          </label>
+          <label for="shipping2" class="radio-inline">
+            <input 
+            	type="radio" 
+            	name="shipping" 
+            	id="shipping2" 
+            	value="2"
+            	th:field="*{shipping}"/> 2
+          </label>
+          <label for="shipping3" class="radio-inline">
+            <input 
+            	type="radio" 
+            	name="shipping" 
+            	id="shipping3" 
+            	value="3"
+            	th:field="*{shipping}"/> 3
+          </label>
+        </div>
+      </div>
+      <!-- shipping -->
+      <div class="form-group">
+        <label 
+        	for="category" 
+        	class="col-sm-2 control-label">
+        </label>
+        <div class="col-sm-8">
+          <span class="text-danger" th:errors="*{shipping}">error:may not be empty</span>
+        </div>
+      </div>
+      
+      
         <!-- description -->
         <div class="form-group">
-          <label for="description" class="col-sm-2 control-label">description</label>
+          <label for="description" 
+          		 class="col-sm-2 control-label" >description
+          </label>
           <div class="col-sm-8">
-            <textarea name="description" id="description" class="form-control" rows="5"></textarea>
+            <textarea name="description" 
+            	      id="description" 
+            	      class="form-control" 
+            	      rows="5"
+            	      th:text="${item.description}"
+            	     ></textarea>
+            	      <span class="text-danger"
+          				    th:errors="*{description}">error:may not be empty</span>
+          				    
           </div>
         </div>
+        
+        
         <!-- submit button -->
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button type="submit" 
+            	    class="btn btn-default">Submit</button>
           </div>
         </div>
       </form>
-    </div>
+      
+      
+      <!-- scriptタグ -->
+  	<script th:src="@{/js/editAjax.js}"></script>
+  	<script th:src="@{/js/SelectBox.js}"></script>
 </body>
 </html>

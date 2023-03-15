@@ -44,7 +44,10 @@
 
   <!-- details -->
   <div id="input-main" class="container">
-    <a type="button" class="btn btn-default" th:href="@{/addList}"><i class="fa fa-reply"></i> back</a>
+    <a type="button" 
+       class="btn btn-default" 
+       th:href="@{/add/addList}">
+       <i class="fa fa-reply"></i> back</a>
     <h2>Add</h2>
 	<div class="container">
 		<h1 class="page-title">Transmission completed!</h1>
@@ -53,10 +56,12 @@
 		</div>
 			<form th:action="@{/items/showItemList}" method="get" >
 				<div class="row order-finished-btn">
-					<button class="btn btn-default" type="button" th:href="@{/items/showItemList}">
-						<!-- onclick="location.href='item_list.html'" -->
-						<span>ItemList</span>
-					</button>
+					<div id="ItemListButton">
+						<a class="btn btn-default" 
+						   type="button" 
+						   th:href="@{/items/showItemList}"> 
+						<i class="fa fa-reply"></i>ItemList</a>
+					</div>
 
 				</div>
 			</form>

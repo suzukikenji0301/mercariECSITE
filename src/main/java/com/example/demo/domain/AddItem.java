@@ -1,18 +1,30 @@
 package com.example.demo.domain;
 
-public class Add {
+public class AddItem {
+	
+	private Integer id;
 
 	private String name;
 
-	private Integer price;
+	private double price;
 
-	private String category;
+	private Integer category;
 
 	private String brand;
 
 	private Integer condition;
 
+	private Integer shipping;
+
 	private String description;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -22,19 +34,19 @@ public class Add {
 		this.name = name;
 	}
 
-	public Integer getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
-	public String getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
 
@@ -54,6 +66,14 @@ public class Add {
 		this.condition = condition;
 	}
 
+	public Integer getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(Integer shipping) {
+		this.shipping = shipping;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -64,8 +84,8 @@ public class Add {
 
 	@Override
 	public String toString() {
-		return "Add [name=" + name + ", price=" + price + ", category=" + category + ", brand=" + brand + ", condition="
-				+ condition + ", description=" + description + "]";
+		return "AddItem [id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", brand="
+				+ brand + ", condition=" + condition + ", shipping=" + shipping + ", description=" + description + "]";
 	}
 
 }

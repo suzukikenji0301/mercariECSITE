@@ -4,14 +4,8 @@ import org.hibernate.validator.constraints.Range;
 
 import jakarta.validation.constraints.NotBlank;
 
-/**
- * 追加するアイテム情報を格納するフォーム.
- * 
- * @author kenji.suzuki
- *
- */
-public class AddForm {
-	
+public class EditForm {
+
 	@NotBlank(message = "名前の入力は必須です")
 	private String name;
 
@@ -111,14 +105,9 @@ public class AddForm {
 
 	@Override
 	public String toString() {
-		return "AddForm [name=" + name + ", price=" + price + ", bigcategory=" + bigcategory + ", childcategory="
+		return "EditForm [name=" + name + ", price=" + price + ", bigcategory=" + bigcategory + ", childcategory="
 				+ childcategory + ", grandcategory=" + grandcategory + ", brand=" + brand + ", condition=" + condition
 				+ ", shipping=" + shipping + ", description=" + description + "]";
-	}
-
-	public void setCondition(String string) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
