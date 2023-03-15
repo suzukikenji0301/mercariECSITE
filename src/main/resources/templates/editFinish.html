@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <!-- css -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" 
@@ -41,44 +43,25 @@
   </nav>
 
   <!-- details -->
-  <div class="container">
+  <div id="input-main" class="container">
     <a type="button" class="btn btn-default" th:href="@{/items/showItemList}"><i class="fa fa-reply"></i> back</a>
-    <h2>Details</h2>
-    <div id="details">
-      <table class="table table-hover">
-        <tbody>
-          <tr>
-            <th>ID</th>
-            <td th:value="${item.id}">1</td>
-          </tr>
-          <tr>
-            <th>name</th>
-            <td th:text="${item.name}">Razer BlackWidow Chroma Keyboard</td>
-          </tr>
-          <tr>
-            <th>price</th>
-            <td th:text="${item.price}">$52.0</td>
-          </tr>
-          <tr>
-            <th>category</th>
-            <td th:text="${item.category}">Electronics / Computers &amp; Tablets / Components &amp; Parts</td>
-          </tr>
-          <tr>
-            <th>brand</th>
-            <td th:text="${item.brand}">Razer</td>
-          </tr>
-          <tr>
-            <th>condition</th>
-            <td th:text="${item.condition}">3</td>
-          </tr>
-          <tr>
-            <th>description</th>
-            <td th:text="${item.description}">I realized his pants are on backwards after the picture. They were very dirty so I hand washed them. He has a stuffed body and painted porcelain head, hands and feet. Back before clowns were too scary. 9"" tall. No chips or cracks but minor paint loss in a few places. Clown Circus Doll Collectible</td>
-          </tr>
-        </tbody>
-      </table>
-      <a type="button" class="btn btn-default" th:href="@{/edit/showEdit?id=}+${item.id}"><i class="fa fa-pencil-square-o"></i>&nbsp;edit</a>
-    </div>
-  </div>
+    <h2>Add</h2>
+	<div class="container">
+		<h1 class="page-title">Transmission completed!</h1>
+		<div class="order-finished-thanks-message">
+			<h3>Item information has been updated.!</h3>
+		</div>
+			<form th:action="@{/items/showItemList}" method="get" >
+				<div class="row order-finished-btn">
+					<a class="btn btn-default" type="button" th:href="@{/items/showItemList}">
+						<!-- onclick="location.href='item_list.html'" -->
+						<span>ItemList</span>
+					</a>
+
+				</div>
+			</form>
+	</div>
+    
+      
 </body>
 </html>

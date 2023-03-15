@@ -1,22 +1,22 @@
 package com.example.demo.domain;
 
-public class Item {
+public class ItemCategory {
 
-	/** id */
+	/** ID */
 	private Integer id;
 	/** 名前 */
 	private String name;
-	/** 値段 */
-	private Integer condition;
-	/** カテゴリ */
-	private String category;
+	/** category */
+	private Integer category;
 	/** ブランド */
 	private String brand;
 	/** 値段 */
-	private Integer price;
-	/** 出荷 */
+	private Double price;
+	/** コンディション */
+	private Integer condition;
+	/** 発送単位 */
 	private Integer shipping;
-	/** 説明 */
+	/** 商品説明 */
 	private String description;
 
 	public Integer getId() {
@@ -35,19 +35,11 @@ public class Item {
 		this.name = name;
 	}
 
-	public Integer getCondition() {
-		return condition;
-	}
-
-	public void setCondition(Integer condition) {
-		this.condition = condition;
-	}
-
-	public String getCategory() {
+	public Integer getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
+	public void setCategory(Integer category) {
 		this.category = category;
 	}
 
@@ -59,12 +51,20 @@ public class Item {
 		this.brand = brand;
 	}
 
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
+	}
+
+	public Integer getCondition() {
+		return condition;
+	}
+
+	public void setCondition(Integer condition) {
+		this.condition = condition;
 	}
 
 	public Integer getShipping() {
@@ -81,6 +81,12 @@ public class Item {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemCategory [id=" + id + ", name=" + name + ", category=" + category + ", brand=" + brand + ", price="
+				+ price + ", condition=" + condition + ", shipping=" + shipping + ", description=" + description + "]";
 	}
 
 }

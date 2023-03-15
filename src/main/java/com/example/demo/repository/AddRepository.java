@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.Add;
+import com.example.demo.domain.AddItem;
 
 
 @Repository
@@ -20,11 +20,10 @@ public class AddRepository {
 	 * 
 	 * @param contact 商品情報
 	 */
-	public void insertAdd(Add add) {
-		
+	public void insertAdd(AddItem add) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(add);
 		String sql = "insert into items(name,price,category,brand,condition,description) values(:name,:price,:category,:brand,:condition,:description);";
-		System.out.println(add);
+		System.out.println("商品を追加しました内容は" + add + "となります。");
 		template.update(sql, param);
 	}
 }
