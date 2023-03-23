@@ -1,5 +1,11 @@
 package com.example.demo.domain;
 
+/**
+ * アイテムとカテゴリー情報を格納するドメイン.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 public class ItemCategory {
 
 	/** ID */

@@ -13,6 +13,12 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.domain.Category;
 
+/**
+ * カテゴリー情報を操作するリポシトリ.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Repository
 public class CategoryRepository {
 

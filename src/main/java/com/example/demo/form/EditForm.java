@@ -4,6 +4,12 @@ import org.hibernate.validator.constraints.Range;
 
 import jakarta.validation.constraints.NotBlank;
 
+/**
+ * 商品編集時に受け取るフォーム.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 public class EditForm {
 
 	@NotBlank(message = "名前の入力は必須です")

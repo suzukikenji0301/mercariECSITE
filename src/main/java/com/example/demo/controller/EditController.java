@@ -14,13 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.domain.AddItem;
 import com.example.demo.domain.Category;
 import com.example.demo.domain.ItemCategory;
 import com.example.demo.form.EditForm;
 import com.example.demo.service.CategoryService;
 import com.example.demo.service.EditService;
 
+/**
+ * 商品編集機能を操作するコントローラー.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Controller
 @RequestMapping("/edit")
 public class EditController {
@@ -41,13 +46,13 @@ public class EditController {
 	 */
 	@GetMapping("/showEdit")
 	private String showEdit(EditForm form, Model model, Integer id) {
-		System.out.println("Editアクセス開始id = " + id);
+			System.out.println("Editアクセス開始id = " + id);
 		List<Category> bigcategoryList = categoryService.findByBigCategory();
 		model.addAttribute("bigcategoryList", bigcategoryList);
-		String confirmedMessage = (String) model.getAttribute("confirmed");
+			String confirmedMessage = (String) model.getAttribute("confirmed");
 		model.addAttribute("confirmed", confirmedMessage);
 		ItemCategory item = editService.showEdit(id);
-		System.out.println("item" + item);
+			System.out.println("item" + item);
 		model.addAttribute("item", item);
 //		
 //		String category = item.getCategory();
@@ -73,7 +78,7 @@ public class EditController {
 	@PostMapping("/childCategory")
 	public List<Category> childCategory(Integer bigCategory) {
 		List<Category> childcategoryList = categoryService.findByChildCategory(bigCategory);
-		System.out.println("/childCategoryの中身"+ bigCategory);
+			System.out.println("/childCategoryの中身"+ bigCategory);
 		return childcategoryList;
 	}
 	
@@ -100,12 +105,12 @@ public class EditController {
 	 */
 	@PostMapping("/update")
 	public String update(@Validated EditForm form, BindingResult result,RedirectAttributes redirectAttributes, Model model, Integer id) {
-		System.out.println("バリデーション開始");
-		System.out.println("Edit update" + form);
+			System.out.println("バリデーション開始");
+			System.out.println("Edit update" + form);
 		if (result.hasErrors()) {
 			return showEdit(form,model,id);
 		}
-		System.out.println("バリデーション終了");
+			System.out.println("バリデーション終了");
 		ItemCategory item = new ItemCategory();
 		item.setId(id);
 		item.setName(form.getName());
@@ -117,7 +122,7 @@ public class EditController {
 		item.setCondition(form.getCondition());
 		item.setDescription(form.getDescription());
 		BeanUtils.copyProperties(form, item);
-		 System.out.println("makeItems（）itemの中身" + item);
+			System.out.println("makeItems（）itemの中身" + item);
 			editService.update(item);
 			redirectAttributes.addFlashAttribute("complete", "変更が完了しました");
 			return "editFinish";

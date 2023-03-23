@@ -1,5 +1,11 @@
 package com.example.demo.form;
 
+/**
+ * アイテムを検索する際受け取るフォーム.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 public class ItemSearchForm {
 
 	/** 商品名 */

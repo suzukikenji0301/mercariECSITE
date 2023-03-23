@@ -9,16 +9,20 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.domain.Item;
 import com.example.demo.domain.ItemCategory;
 
+/**
+ * 商品編集を操作するリポシトリ.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Repository
 public class EditRepository {
 
 	@Autowired
 	private NamedParameterJdbcTemplate template;
 	
-	private static final RowMapper<Item> ITEM_ROW_MAPPER = new BeanPropertyRowMapper<>(Item.class);
 	private static final RowMapper<ItemCategory> ITEMCATEGORY_ROW_MAPPER = new BeanPropertyRowMapper<>(ItemCategory.class);
 
 	/**

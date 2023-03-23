@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.domain.AddItem;
 
 
+/**
+ * アイテム追加情報を操作するリポシトリ.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Repository
 public class AddRepository {
 	

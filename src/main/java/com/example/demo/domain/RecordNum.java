@@ -1,7 +1,14 @@
 package com.example.demo.domain;
 
+/**
+ * ページング機能のページ数を格納するドメイン.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 public class RecordNum {
 	
+	/** レコード情報 */
 	private Integer recordNum;
 
 	public Integer getRecordNum() {

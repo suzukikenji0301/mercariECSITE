@@ -11,6 +11,8 @@ import com.example.demo.domain.Item;
 import com.example.demo.service.DetailService;
 
 /**
+ * 商品詳細画面を操作するコントローラー.
+ * 
  * @author kenji.suzuki
  *
  */
@@ -32,7 +34,7 @@ public class ShowItemDetailController {
 	public String ItemDetail(int id, Model model) {
 		Item itemDetail = detailService.showItemDetail(id);
 		model.addAttribute(itemDetail);
-		System.out.println(itemDetail);
+			System.out.println(itemDetail);
 		return "detail";
 	}
 	

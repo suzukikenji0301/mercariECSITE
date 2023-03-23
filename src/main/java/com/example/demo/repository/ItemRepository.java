@@ -16,6 +16,12 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.domain.Item;
 import com.example.demo.domain.RecordNum;
 
+/**
+ * アイテム情報を操作するリポシトリ.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Repository
 public class ItemRepository {
 	@Autowired
@@ -47,18 +53,6 @@ public class ItemRepository {
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
 		return itemList;
 	}
-
-//	/**
-//	 * Itemデータをid昇順で100件検索します.
-//	 * 
-//	 * @return itemList LIMIT 100
-//	 */
-//	public List<Item> find30List(Integer pageCount) {
-//		String sql ="SELECT id,name,condition,category,brand,price,shipping,description FROM items ORDER BY id ASC LIMIT 100;";
-//		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
-//			System.out.println("Repository　find30List来ました");
-//		return itemList;
-//	}
 
 	/**
 	 * itemsテーブルのIDをカウントし検索します.
@@ -109,53 +103,6 @@ public class ItemRepository {
 		List<Item> itemList = template.query(sql, ITEM_ROW_MAPPER);
 		return itemList;
 	}
-//	/**
-//	 * 検索Formに入力された物を検索して該当アイテムを表示させる(1ページ30件まで).
-//	 * 
-//	 * @param name
-//	 * @param brand
-//	 * @param categoryId
-//	 * @param page
-//	 * @return
-//	 */
-//	public List<ItemCategory> findBySearchForm(String name, String brand, Integer categoryId, Integer page) {
-//
-//		Integer andNum = 0;// 次ANDが必要なときは1にする
-//		StringBuilder sql = new StringBuilder();
-//		sql.append("SELECT i.id i_id,i.name i_name,co.condition co_condition,ca.name_all ca_name_all,i.brand i_brand,i.price i_price,i.shipping i_shipping,d.description d_description,i.version i_version FROM items i JOIN category ca ON i.category = ca.id JOIN Condition co ON i.condition = co.id JOIN description d ON i.description = d.id ");
-//		if ((!name.equals("") || !brand.equals("")) || categoryId != null) {
-//			sql.append(" WHERE ");
-//		}
-//		if (!name.equals("")) {
-//			sql.append(" i.name LIKE '%" + name + "%' ");
-//			andNum = 1;
-//			if (categoryId != null) {
-//				if (andNum == 1) {
-//					sql.append(" AND ");
-//					andNum = 1;
-//				}
-//				sql.append(" ca.category = " + categoryId + " ");
-//			}
-//			if (!brand.equals("")) {
-//				if (andNum == 1) {
-//					sql.append(" AND ");
-//					andNum = 1;
-//				}
-//				sql.append(" i.brand LIKE '%" + brand + "%' ");
-//			}
-//			sql.append(" ORDER BY i.name ");
-//			if (page == 0) {
-//				sql.append(" LIMIT 30");
-//			} else {
-//				page = page * 30;
-//				sql.append(" LIMIT 30 OFFSET " + page);
-//			}
-//			sql.append(" ;");
-//			List<ItemCategory> itemList = template.query(sql.toString(), ITEM_RESULTSET_EXTRACTOR);
-//			return itemList;
-//		}
-//		return null;
-//	}
 
 	/**
 	 * Itemデータをidで紐づけて1件検索します.

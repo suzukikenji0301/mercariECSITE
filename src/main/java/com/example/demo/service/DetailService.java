@@ -7,6 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.domain.Item;
 import com.example.demo.repository.ItemRepository;
 
+/**
+ * 商品詳細情報を操作するサービス.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Service
 @Transactional
 public class DetailService {

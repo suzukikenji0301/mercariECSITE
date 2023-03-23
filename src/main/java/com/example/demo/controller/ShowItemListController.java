@@ -43,7 +43,7 @@ public class ShowItemListController {
 		private int recordNum;
 		
 		// 現在のページ
-		private int currentPage = 0;
+		private int currentPage = 1;
 		
 		// 全レコードの件数から算出されるページ数（recordNum/outputNum）
 		private int maxPage;
@@ -98,7 +98,7 @@ public class ShowItemListController {
 		//1ページよりも前に戻ろうとすると１ページ目に遷移するようにしているif文
 		if(currentPage <= 0) {
 			currentPage = 0;
-			return "redirect:/list";
+			return "list";
 		}
 		int num2 = OUT_PUT_NUM * currentPage;
 		List<Item> itemList = itemService.LimitAndOffset(OUT_PUT_NUM, num2);

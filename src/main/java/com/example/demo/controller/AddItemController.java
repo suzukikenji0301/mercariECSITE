@@ -20,6 +20,12 @@ import com.example.demo.form.AddForm;
 import com.example.demo.service.AddService;
 import com.example.demo.service.CategoryService;
 
+/**
+ * 商品追加機能を操作するコントローラー.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Controller
 @RequestMapping("/add")
 public class AddItemController {
@@ -40,7 +46,7 @@ public class AddItemController {
 	public String showAddPage(AddForm form,Model model) {
 		List<Category> bigcategoryList = categoryService.findByBigCategory();
 		model.addAttribute("bigcategoryList", bigcategoryList);
-		String confirmedMessage = (String) model.getAttribute("confirmed");
+			String confirmedMessage = (String) model.getAttribute("confirmed");
 		model.addAttribute("confirmed", confirmedMessage);
 		return "add";
 	}
@@ -53,7 +59,7 @@ public class AddItemController {
 	@PostMapping("/childCategory")
 	public List<Category> childCategory(Integer bigCategory) {
 		List<Category> childcategoryList = categoryService.findByChildCategory(bigCategory);
-		System.out.println("/childCategoryの中身"+ bigCategory);
+			System.out.println("/childCategoryの中身"+ bigCategory);
 		return childcategoryList;
 	}
 	
@@ -78,7 +84,8 @@ public class AddItemController {
 	 */
 	@PostMapping("/insertAdd")
 	public String insertAdd(@Validated AddForm form, BindingResult result, Model model,RedirectAttributes redirectAttributes) {
-		System.out.println("Add" + form);
+			System.out.println("バリデーション開始");
+			System.out.println("Add" + form);
 		if (result.hasErrors()) {
 			return showAddPage(form, model);
 		}
@@ -88,7 +95,7 @@ public class AddItemController {
 		add.setCategory(Integer.parseInt(form.getGrandcategory()));
 		addService.insertAdd(add);
 		redirectAttributes.addFlashAttribute("confirmed", AddItem.class + "が新しく在庫に追加されました!");
-		System.out.println("送信された");
+			System.out.println("送信された");
 		return "addFinish";
 	}
 	

@@ -3,17 +3,18 @@ package com.example.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.domain.Item;
 import com.example.demo.domain.ItemCategory;
 import com.example.demo.repository.EditRepository;
 
+/**
+ * 商品編集を操作するサービス.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Service
 public class EditService {
 
-//	@Autowired
-//	private CategoryRepository categoryRepository;
-//	@Autowired
-//	private ItemRepository itemRepository;
 	@Autowired
 	private EditRepository editRepository;
 	
@@ -30,7 +31,6 @@ public class EditService {
 		System.out.println(item);
 		return item;
 	}
-	
 	
 	/**
 	 * Item情報を更新.
