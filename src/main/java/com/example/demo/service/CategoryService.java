@@ -9,6 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.domain.Category;
 import com.example.demo.repository.CategoryRepository;
 
+/**
+ * カテゴリー情報を操作するサービス.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Service
 @Transactional
 public class CategoryService {

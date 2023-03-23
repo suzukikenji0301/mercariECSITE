@@ -10,6 +10,12 @@ import com.example.demo.domain.Item;
 import com.example.demo.form.ItemSearchForm;
 import com.example.demo.repository.ItemRepository;
 
+/**
+ * アイテム情報を操作するサービス.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Service
 @Transactional
 public class ItemService {

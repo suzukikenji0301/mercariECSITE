@@ -1,13 +1,20 @@
 package com.example.demo.domain;
 
+/**
+ * カテゴリー情報を格納するドメイン.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 public class Category {
 
+	/**　id */
 	private Integer id;
-
+	/**　親項目 */
 	private Integer parent;
-
+	/**　名前 */
 	private String name;
-
+	/**　すべての名前 */
 	private String name_all;
 
 	public Integer getId() {

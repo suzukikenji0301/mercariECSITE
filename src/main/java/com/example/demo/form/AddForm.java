@@ -1,11 +1,12 @@
 package com.example.demo.form;
 
+
 import org.hibernate.validator.constraints.Range;
 
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * 追加するアイテム情報を格納するフォーム.
+ * 追加するアイテム情報を受け取るフォーム.
  * 
  * @author kenji.suzuki
  *
@@ -15,7 +16,8 @@ public class AddForm {
 	@NotBlank(message = "名前の入力は必須です")
 	private String name;
 
-	@Range(min = 1, max = 100, message = "priceの入力は必須です")
+//	@Range(min = 1, max = 100, message = "priceの入力は必須です")
+	@NotBlank(message = "priceの入力は必須です")
 	private String price;
 
 	@NotBlank(message = "bigCategoryを選択してください")

@@ -10,6 +10,12 @@ import com.example.demo.domain.Item;
 import com.example.demo.repository.AddRepository;
 import com.example.demo.repository.ItemRepository;
 
+/**
+ * 商品情報を操作するサービス.
+ * 
+ * @author kenji.suzuki
+ *
+ */
 @Service
 @Transactional
 public class AddService {

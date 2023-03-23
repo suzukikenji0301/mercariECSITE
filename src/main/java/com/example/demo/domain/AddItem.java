@@ -1,21 +1,26 @@
 package com.example.demo.domain;
 
+/**
+ * 商品追加情報を格納するドメイン.
+ * 
+ * @author kenji.suzuki
+ */
 public class AddItem {
-	
+	 /** id */
 	private Integer id;
-
+	/** 名前 */
 	private String name;
-
+	/** 値段 */
 	private double price;
-
+	/** カテゴリ */
 	private Integer category;
-
+	/** ブランド */
 	private String brand;
-
+	/** 状態 */
 	private Integer condition;
-
+	/** 出荷 */
 	private Integer shipping;
-
+	/** 説明 */
 	private String description;
 
 	public Integer getId() {
